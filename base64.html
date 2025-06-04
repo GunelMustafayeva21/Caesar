@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <title>Base64 Kodlaşdırma</title>
+  <link rel="shortcut icon" href="https://www.freeiconspng.com/thumbs/encryption-icon/encryption-icon-11.png" type="image/png">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0; padding: 0;
+      color: #333;
+    }
+    nav {
+      background: #34495e;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      gap: 20px;
+      font-weight: bold;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    nav a:hover {
+      background: #e67e22;
+    }
+    nav a.active {
+      background: #e67e22;
+      color: white;
+    }
+    main {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    h1 {
+      margin-bottom: 10px;
+      color: #2980b9;
+    }
+    .explanation {
+      background: #f9f9f9;
+      border-left: 5px solid #2980b9;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    label, input, button {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      max-width: 400px;
+      border: 1.5px solid #ddd;
+      border-radius: 5px;
+      transition: border-color 0.3s ease;
+    }
+    input:focus {
+      border-color: #2980b9;
+      outline: none;
+    }
+    button {
+      background: #2980b9;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+      width: max-content;
+    }
+    button:hover {
+      background: #2573a6;
+    }
+    #output {
+      font-family: monospace;
+      font-size: 20px;
+      padding: 15px;
+      background: #f4f4f4;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      max-width: 400px;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="caesar.html">Caesar Cipher</a>
+  <a href="base64.html" class="active">Base64 Kodlaşdırma</a>
+  <a href="sha256.html">SHA-256 Hash</a>
+</nav>
+
+<main>
+  <h1>Base64 Kodlaşdırma</h1>
+
+  <div class="explanation">
+    <p><strong>Base64 nədir?</strong></p>
+    <p>Base64 kodlaşdırması məlumatı (məsələn, söz və ya fayl) 64 simvoldan ibarət xüsusi simvol dəstinə çevirir. Bu, əsasən məlumatı internet üzərində təhlükəsiz və stabil ötürmək üçün istifadə olunur.</p>
+    
+    <p><strong>Necə işləyir?</strong></p>
+    <ol>
+      <li>Əvvəlcə məlumat 8 bitlik baytlara bölünür.</li>
+      <li>Sonra bu baytlar 6 bitlik qruplara çevrilir (64 = 2^6).</li>
+      <li>Hər 6 bitlik qrup Base64 simvol cədvəlindəki uyğun simvola çevrilir.</li>
+      <li>Nəticədə oxunaqlı, ancaq insan üçün anlamlı olmayan simvol zənciri yaranır.</li>
+    </ol>
+    
+    <p><strong>Misal:</strong> "Hello" → "SGVsbG8="</p>
+  </div>
+
+  <label for="inputText">Kodlaşdırmaq istədiyiniz sözü daxil edin:</label>
+  <input type="text" id="inputText" placeholder="Məsələn: Hello" />
+
+  <button onclick="encodeBase64()">Kodlaşdır</button>
+
+  <h3>Nəticə:</h3>
+  <div id="output"></div>
+</main>
+
+<script>
+  function encodeBase64() {
+    const input = document.getElementById('inputText').value;
+    // JS-də btoa funksiyası ilə Base64 kodlaşdırma edilir
+    try {
+      const encoded = btoa(unescape(encodeURIComponent(input)));
+      document.getElementById('output').textContent = encoded;
+    } catch (e) {
+      document.getElementById('output').textContent = "Base64 kodlaşdırıla bilmədi!";
+    }
+  }
+</script>
+
+</body>
+</html>
